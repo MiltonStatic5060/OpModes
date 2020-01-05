@@ -2,10 +2,6 @@
 
 The autonomous program will act in phases, indicated by the `phase_counter` variable.  Each phase is a single action taken by the robot.  Simple actions include `drive forward` or `rotate cw 90 deg`.  After a condition has been met, usually after a certain time period, or sensor value, the `phase_counter` can then be incremented to the next phase.  
 
-`CONTINUOUS` means the loop repeats in order for the action to occur
-
-`ITERATIVE` means the loop does not repeat and the next phase will occur as soon as the current phase ends
-
 ## Goals
 
 - 10pts Repositioning the Building site 
@@ -40,7 +36,7 @@ Starting Position: in Building Site
 - Drive forward to foundation (Direction can be different)
 - Drop Arm all the way 
 - Drive Backwards
-- End Usefulness (May proceed with parking action or other)
+
 
 ## Harder Difficulty Autonomous - Stone Manipulation
 
