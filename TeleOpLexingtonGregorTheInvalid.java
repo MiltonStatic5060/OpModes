@@ -59,7 +59,7 @@ public class TeleOpLexingtonGregorTheInvalid extends OpMode {
     @Override
     public void loop(){
         //what happens during TeleOp phase
-
+        telemetry.addData("OpMode Status","Looping Now");
         //DRIVE CODE --> north/south/east/west movement
         motorFL.setPower(-gamepad1.left_stick_y-gamepad1.left_stick_x);
         motorBL.setPower(-gamepad1.left_stick_y+gamepad1.left_stick_x);
