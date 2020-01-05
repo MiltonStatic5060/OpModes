@@ -1,0 +1,109 @@
+# Build stuff
+Android build packages
+build-tools;25.0.3 
+platforms;android-19
+platforms;android-23
+platforms;android-25
+lldb;2.3
+ndk-bundle
+
+#Linux Install for FTC APP
+wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+https://github.com/remoteinterview/compilebox
+sudo apt update;sudo apt-get install -y software-properties-common python-software-properties;sudo add-apt-repository ppa:webupd8team/java -y; sudo apt update; sudo apt install -y oracle-java8-installer;
+https://www.dropbox.com/sh/8cmjsbqo2jjugko/AAAnpP4vR-gjQNgi19FbMdMva?dl=0
+sudo apt-get install lib32stdc++6 lib32z1
+
+git clone https://github.com/MiltonStatic5060/ftc_app
+
+#Windows Install for FTC APP
+https://eternallybored.org/misc/wget/current/wget64.exe
+https://eternallybored.org/misc/wget/current/wget.exe
+http://www.oracle.com/technetwork/java/javase/autodownload-140472.html
+http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-windows-x64.exe
+http://7-zip.org/a/7z1604-x64.exe
+http://7-zip.org/a/7z1604.exe
+
+#Ubuntu 14.04 ftc_app install minimal
+
+#Install Necessary Dependencies
+sudo apt update;sudo apt-get install software-properties-common python-software-properties -y;sudo add-apt-repository ppa:webupd8team/java -y; sudo apt update; sudo apt install oracle-java8-installer git -y;sudo apt-get install lib32stdc++6 lib32z1 -y
+
+#optional remove jdk 7
+sudo apt remove openjdk-7*; sudo apt-get autoremove
+
+#git clone the ftc_app repo from github
+cd ~
+mkdir gitr
+cd gitr
+git clone --depth=1 https://github.com/MiltonStatic5060/ftc_app
+
+#download and unzip sdk and remove archive
+wget https://www.dropbox.com/s/8yicx60tuzvqc64/sdk.zip?dl=0
+unzip sdk.zip?dl=0
+rm sdk.zip?dl=0
+
+#echo "sdk.dir=../sdk" > ./ftc/local.properties
+
+#make gradle command
+echo "alias gradle='~/gitr/ftc_app/gradlew'" >> ~/.bashrc
+source ~/.bashrc
+
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.robot.Robot;
+
+import com.qualcomm.robotcore.hardware.*;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+/**
+ * Example OpMode
+ */
+@TeleOp(name="Relic Recovery Teleop Main", group="Relic")
+//@Disabled //This disables the opmode on the phone. 
+//Comment out to make it visible on phone
+
+public class MotorTargetPositions extends OpMode {
+    DcMotor blockLift;
+
+    public void init(){
+        blockLift = hardwareMap.get(DcMotor.class,"blockLift");
+        blockLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    } //Closes the init()
+
+    public void loop(){
+blockLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+       
+blockLift.setTargetPosition(1440); 
+//1440 encoders is 360 degrees.  360 degrees is one rotation. How many encoders is 2 rotations?
+
+
+    } //Closes the loop()
+
+} //Closes the class
+
+
+public class ServoPosition {
+    Servo servoLeft;
+    Servo servoRight;
+
+    public void init(){
+        servoLeft = hardwareMap.get(Servo.class,"servoLeft");
+servoRight = hardwareMap.get(Servo.class,"servoRight");
+
+    } //Closes the init()
+
+    public void loop(){
+servoLeft.setPosition(gamepad1.left_trigger * 0.5);
+servoRight.setPosition(1-gamepad1.left_trigger * 0.5);
+//left_trigger or right_trigger gives you values from 0 to 1
+
+//servos go from 0 degrees to 180 degrees
+//position goes from 0 to 1
+
+    } //Closes the loop
+} //Closes the class
